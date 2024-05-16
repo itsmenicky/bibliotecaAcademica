@@ -2,13 +2,16 @@ package com.itsmenicky.bibliotecaAcademica.models;
 
 import lombok.Getter;
 import java.util.List;
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Getter
 @Entity
-public class autor implements Serializable {
+@Getter
+@Setter
+public class Autor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +21,5 @@ public class autor implements Serializable {
     private String nome;
 
     @ManyToMany
-    private List<livro> livros;
+    private List<Livro> livros;
 }

@@ -1,14 +1,17 @@
 package com.itsmenicky.bibliotecaAcademica.models;
-
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-@Getter
 @Entity
-public class livro implements Serializable{
+@Getter
+@Setter
+public class Livro implements Serializable{
     private final static long serialVersionUID = 1L;
 
     @Id
@@ -28,5 +31,5 @@ public class livro implements Serializable{
     private String edicao;
 
     @ManyToMany
-    private List<autor> autores;
+    private List<Autor> autores;
 }
