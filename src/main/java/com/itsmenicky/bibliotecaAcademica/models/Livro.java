@@ -1,12 +1,10 @@
 package com.itsmenicky.bibliotecaAcademica.models;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.List;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -16,12 +14,12 @@ public class Livro implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_livro;
+    private long id;
 
     @NotEmpty
     private String título;
 
-    @NotEmpty
+    @NotNull
     private Integer ISBN;
 
     @NotEmpty
