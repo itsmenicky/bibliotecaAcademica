@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsuarioController {
     @Autowired
     private UsuarioRepository ur;
-    
+
     //Chamando form que cadastra usuários
     @RequestMapping(value="/cadastrarUsuario", method = RequestMethod.GET)
     public String form(){

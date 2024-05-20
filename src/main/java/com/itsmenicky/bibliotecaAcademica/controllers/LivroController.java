@@ -31,7 +31,7 @@ public class LivroController {
 
         lr.save(livro);
         attributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso!");
-        return "re";
+        return "redirect:/livros";
     }
 
     //Deletar livro
