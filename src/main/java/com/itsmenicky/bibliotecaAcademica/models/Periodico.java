@@ -1,20 +1,19 @@
 package com.itsmenicky.bibliotecaAcademica.models;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import javax.validation.constraints.NotEmpty;
+import lombok.Data;
+import jakarta.validation.constraints.*;
+import java.io.Serializable;
 
 @Entity
-@Getter
-@Setter
-public class Periodico {
+@Data
+public class Periodico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_periodico;
+    private long id;
 
     @NotEmpty
     private String titulo;
 
-    @OneToMany
-    private String editora;
+    @ManyToOne
+    private Editora editora;
 }
