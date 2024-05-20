@@ -1,15 +1,13 @@
 package com.itsmenicky.bibliotecaAcademica.models;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 import jakarta.validation.constraints.*;
 import java.util.Date;
 
+@Data
 @Entity
-@Getter
-@Setter
 public class Usuario implements Serializable {
     private final static long serialVersionUID = 1L;
 
