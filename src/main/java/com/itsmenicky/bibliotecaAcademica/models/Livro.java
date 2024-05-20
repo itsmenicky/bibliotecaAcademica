@@ -1,14 +1,12 @@
 package com.itsmenicky.bibliotecaAcademica.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
+@Data
 @Entity
-@Getter
-@Setter
 public class Livro implements Serializable{
     private final static long serialVersionUID = 1L;
 
