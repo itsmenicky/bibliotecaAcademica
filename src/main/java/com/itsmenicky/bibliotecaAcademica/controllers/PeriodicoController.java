@@ -61,8 +61,8 @@ public class PeriodicoController {
     }
 
     //Chamando tela para editar periódicos
-    @RequestMapping("/editar-periodico")
-    public ModelAndView editarPeriodico(long id){
+    @RequestMapping("/editar-periodico/{id}")
+    public ModelAndView editarPeriodico(@PathVariable("id") long id){
         ModelAndView mv = new ModelAndView("/periodico/editar-periodico");
         Periodico periodico = pr.findById(id);
         mv.addObject("periodico", periodico);
@@ -70,13 +70,29 @@ public class PeriodicoController {
     }
 
     //Editando informações de um periódico
-    @RequestMapping(value = "/editar-periodico", method = RequestMethod.POST)
-    public String editarPeriodico(@Valid Periodico periodico, BindingResult result, RedirectAttributes attributes){
+    @RequestMapping(value = "/editar-periodico/{id}", method = RequestMethod.POST)
+    public String editarPeriodico(@PathVariable("id") long id, @Valid Periodico periodico, BindingResult result, RedirectAttributes attributes, @RequestParam("imagem") MultipartFile imagem){
         if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Revise os campos!");
             return "redirect:/editar-periodico";
         }
-        pr.save(periodico);
+
+        Periodico currentPeriodico = pr.findById(id);
+
+        currentPeriodico.setTitulo(periodico.getTitulo());
+        currentPeriodico.setData_publicacao(periodico.getData_publicacao());
+
+        if(!imagem.isEmpty()){
+            try {
+                currentPeriodico.setCapa_periodico(imagem.getBytes());
+            }catch (IOException e){
+                attributes.addFlashAttribute("mensagem", "Erro ao carregar imagem do livro");
+                return "redirect:/livros";
+            }
+        }
+
+        pr.save(currentPeriodico);
+        attributes.addFlashAttribute("mensagem", "Periódico atualizado com sucesso!");
         return "redirect:/periodico/" + periodico.getId();
     }
 
@@ -90,8 +106,8 @@ public class PeriodicoController {
     }
 
     //Deletando periódico
-    @RequestMapping("/deletar-periodico")
-    public String deletarPeriodico(long id){
+    @RequestMapping("/deletar-periodico/{id}")
+    public String deletarPeriodico(@PathVariable("id") long id){
         Periodico periodico = pr.findById(id);
         pr.delete(periodico);
         return "redirect:/periodicos";
