@@ -13,7 +13,4 @@ public class Periodico implements Serializable {
 
     @NotEmpty
     private String titulo;
-
-    @ManyToOne
-    private Editora editora;
 }
