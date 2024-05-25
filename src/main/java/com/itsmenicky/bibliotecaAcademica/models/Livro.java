@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Base64;
 
 @Data
 @Entity
@@ -18,7 +18,7 @@ public class Livro implements Serializable{
     private String título;
 
     @NotNull
-    private Integer ISBN;
+    private Long ISBN;
 
     @NotEmpty
     private String situacao;
@@ -26,6 +26,13 @@ public class Livro implements Serializable{
     @NotEmpty
     private String edicao;
 
-    @ManyToMany
-    private List<Autor> autores;
+    @NotEmpty
+    private String autor;
+
+    @Lob
+    private byte[] foto_livro;
+
+    public String getImagemBase64(){
+        return Base64.getEncoder().encodeToString(this.foto_livro);
+    }
 }
