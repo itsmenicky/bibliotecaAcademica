@@ -49,8 +49,8 @@ public class LivroController {
     }
 
     //Deletar livro
-    @RequestMapping("/deletar-livro")
-    public String deletar_livro(long id){
+    @RequestMapping("/deletar-livro/{id}")
+    public String deletar_livro(@PathVariable("id") long id){
         Livro livro = lr.findById(id);
         lr.delete(livro);
         return "redirect:/livros";
@@ -66,8 +66,8 @@ public class LivroController {
     }
 
     //Método que chama a tela de edição de livro
-    @RequestMapping("/editar-livro")
-    public ModelAndView editarLivro(long id){
+    @RequestMapping("/editar-livro/{id}")
+    public ModelAndView editarLivro(@PathVariable("id") long id){
         ModelAndView mv = new ModelAndView("livro/editar-livro");
         Livro livro = lr.findById(id);
         mv.addObject("livro", livro);
