@@ -43,6 +43,9 @@
             <p class="pt-3"><strong>Edição:</strong> <span th:text="${livro.edicao}"></span></p>
             <p class="pt-3"><strong>ISBN:</strong> <span th:text="${livro.ISBN}"></span></p>
             <p class="pt-3"><strong>Situação:</strong> <span th:text="${livro.situacao}"></span></p>
+
+            <a th:href="@{'/editar-livro/' + ${livro.id}}" type="button" class="btn btn-warning mt-5">Editar livro</a>
+            <a th:href="@{'/deletar-livro/' + ${livro.id}}" type="button" class="btn btn-danger mt-5">Apagar livro</a>
         </div>
     </main>
 </body>
