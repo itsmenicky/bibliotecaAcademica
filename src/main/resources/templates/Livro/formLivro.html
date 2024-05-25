@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +8,51 @@
     <title>Home</title>
 </head>
 <body>
-    <form>
-        <div class="mb-3">
-            <label for="livro-titulo" class="form-label">Título</label>
-            <input type="text" class="form-control" id="livro-titulo" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="livro-ISBN" class="form-label">ISBN</label>
-            <input type="text" class="form-control" id="livro-ISBN">
-        </div>
-        <div class="mb-3">
-            <label for="livro-situacao" class="form-label">Situação</label>
-            <input type="text" class="form-control" id="livro-situacao">
-        </div>
-        <div class="mb-3">
-            <label for="livro-edicao" class="form-label">Edição</label>
-            <input type="text" class="form-control" id="livro-edicao">
-        </div>
-        <div class="mb-3">
-            <label for="livro-autores" class="form-label">Autores</label>
-            <input type="text" class="form-control" id="livro-autores">
-        </div>
+    <th:block th:include="mensagem-validacao"></th:block>
+
+    <h1 class="text-center pt-5">Cadastro de livros</h1>
+    <form method="post" class="p-5" enctype="multipart/form-data">
+        <fieldset>
+            <div class="mb-3">
+                <label for="livro-autores" class="form-label">Capa</label>
+                <input type="file" name="imagem" class="form-control" id="livro-imagem">
+            </div>
+            <div class="mb-3">
+                <label for="livro-titulo" class="form-label">Título</label>
+                <input type="text" name="título" class="form-control" id="livro-titulo" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <fieldset class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <label for="livro-autores" class="form-label">Autor</label>
+                        <input type="text" name="autor" class="form-control" id="livro-autores">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="livro-edicao" class="form-label">Edição</label>
+                        <input type="text" name="edicao" class="form-control" id="livro-edicao">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="livro-ISBN" class="form-label">ISBN</label>
+                        <input type="number" name="ISBN" class="form-control" id="livro-ISBN">
+                    </div>
+                    <legend class="col-form-label col-sm-2 pt-0">Situação</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="situacao" id="livro-situacao1" value="Disponível" checked>
+                            <label class="form-check-label" for="livro-situacao1">
+                                Disponível
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="situacao" id="livro-situacao2" value="Indisponível">
+                            <label class="form-check-label" for="livro-situacao2">
+                                Indisponível
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </fieldset>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </body>
