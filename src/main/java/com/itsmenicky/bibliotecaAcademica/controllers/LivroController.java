@@ -22,7 +22,7 @@ public class LivroController {
 
     @RequestMapping(value = "/cadastrar-livro", method = RequestMethod.GET)
     public String form(){
-        return "livro/formLivro";
+        return "livro/form-livro";
     }
 
     //Cadastrando livro
