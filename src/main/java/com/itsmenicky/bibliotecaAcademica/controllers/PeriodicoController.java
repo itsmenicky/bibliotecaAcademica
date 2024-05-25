@@ -31,7 +31,7 @@ public class PeriodicoController {
     @RequestMapping(value = "/cadastrar-periodico", method = RequestMethod.POST)
     public String cadastrarPeriodico(@Valid Periodico periodico, BindingResult result, RedirectAttributes attributes, @RequestParam("imagem") MultipartFile imagem){
         if(result.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+            attributes.addFlashAttribute("mensagem_erro", "Verifique os campos!");
             System.out.println("erro" + result.getAllErrors());
             return "redirect:/cadastrar-periodico";
         }
@@ -41,7 +41,7 @@ public class PeriodicoController {
                 periodico.setCapa_periodico(imagem.getBytes());
             }
         }catch (IOException e){
-            attributes.addFlashAttribute("mensagem", "Erro ao enviar imagem");
+            attributes.addFlashAttribute("mensagem_erro", "Erro ao enviar imagem");
             System.out.println("erro imagem" + result.getAllErrors());
             return "redirect:/cadastrar-periodico";
         }
@@ -73,7 +73,7 @@ public class PeriodicoController {
     @RequestMapping(value = "/editar-periodico/{id}", method = RequestMethod.POST)
     public String editarPeriodico(@PathVariable("id") long id, @Valid Periodico periodico, BindingResult result, RedirectAttributes attributes, @RequestParam("imagem") MultipartFile imagem){
         if(result.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Revise os campos!");
+            attributes.addFlashAttribute("mensagem_erro", "Revise os campos!");
             return "redirect:/editar-periodico";
         }
 
@@ -86,8 +86,8 @@ public class PeriodicoController {
             try {
                 currentPeriodico.setCapa_periodico(imagem.getBytes());
             }catch (IOException e){
-                attributes.addFlashAttribute("mensagem", "Erro ao carregar imagem do livro");
-                return "redirect:/livros";
+                attributes.addFlashAttribute("mensagem_erro", "Erro ao carregar imagem do periódico");
+                return "redirect:/periodicos";
             }
         }
 

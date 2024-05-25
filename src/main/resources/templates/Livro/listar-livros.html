@@ -32,6 +32,7 @@
     </nav>
 </header>
 <main>
+    <th:block th:include="mensagem-validacao"></th:block>
     <h1 class="p-5 text-center">Livros</h1>
     <div class="row justify-content-center">
         <div class="card col-sm-6 m-5" style="width: 18rem;" th:each="livro : ${livros}">

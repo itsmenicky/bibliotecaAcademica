@@ -29,7 +29,7 @@ public class LivroController {
     @RequestMapping(value = "/cadastrar-livro", method = RequestMethod.POST)
     public String form(@Valid Livro livro, BindingResult result, @RequestParam("imagem") MultipartFile imagem, RedirectAttributes attributes){
         if(result.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Revise os campos!");
+            attributes.addFlashAttribute("mensagem_erro", "Revise os campos!");
             return "redirect:/livros";
         }
 
@@ -38,7 +38,7 @@ public class LivroController {
                 livro.setCapa_livro(imagem.getBytes());
             }
         }catch(IOException e){
-            attributes.addFlashAttribute("mensagem", "Erro ao cadastrar imagem do livro");
+            attributes.addFlashAttribute("mensagem_erro", "Erro ao cadastrar imagem do livro");
             return "redirect:/cadastrar-livro";
         }
 
@@ -77,7 +77,7 @@ public class LivroController {
     @RequestMapping(value = "/editar-livro/{id}", method = RequestMethod.POST)
     public String editarLivro(@PathVariable("id") long id, @RequestParam("imagem") MultipartFile imagem, @Valid Livro livro, BindingResult result, RedirectAttributes attributes){
         if(result.hasErrors()){
-            attributes.addFlashAttribute("mensagem", "Revise os campos!");
+            attributes.addFlashAttribute("mensagem_erro", "Revise os campos!");
             return "redirect:/editar-livro";
         }
 
@@ -93,7 +93,7 @@ public class LivroController {
             try {
                 currentLivro.setCapa_livro(imagem.getBytes());
             }catch (IOException e){
-                attributes.addFlashAttribute("mensagem", "Erro ao carregar imagem do livro");
+                attributes.addFlashAttribute("mensagem_erro", "Erro ao carregar imagem do livro");
                 return "redirect:/livros";
             }
         }
