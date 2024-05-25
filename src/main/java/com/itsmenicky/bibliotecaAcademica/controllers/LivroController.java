@@ -8,8 +8,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Controller
 public class LivroController {
@@ -23,9 +27,19 @@ public class LivroController {
 
     //Cadastrando livro
     @RequestMapping(value = "/cadastrar-livro", method = RequestMethod.POST)
-    public String form(@Valid Livro livro, BindingResult result, RedirectAttributes attributes){
+    public String form(@Valid Livro livro, BindingResult result, @RequestParam("imagem") MultipartFile imagem, RedirectAttributes attributes){
         if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Revise os campos!");
+            System.out.println("erro" + result.getAllErrors());
+            return "redirect:/livros";
+        }
+
+        try {
+            if(!imagem.isEmpty()){
+                livro.setFoto_livro(imagem.getBytes());
+            }
+        }catch(IOException e){
+            attributes.addFlashAttribute("mensagem", "Erro ao cadastrar imagem do livro");
             return "redirect:/cadastrar-livro";
         }
 
@@ -45,7 +59,7 @@ public class LivroController {
     //Listar livros
     @RequestMapping("/livros")
     public ModelAndView listarLivros(){
-        ModelAndView mv = new ModelAndView("vaga/listar-livros");
+        ModelAndView mv = new ModelAndView("livro/listar-livros");
         Iterable<Livro> livros = lr.findAll();
         mv.addObject("livros", livros);
         return mv;
@@ -54,7 +68,7 @@ public class LivroController {
     //Método que chama a tela de edição de livro
     @RequestMapping("/editar-livro")
     public ModelAndView editarLivro(long id){
-        ModelAndView mv = new ModelAndView("vaga/editar-livro");
+        ModelAndView mv = new ModelAndView("livro/editar-livro");
         Livro livro = lr.findById(id);
         mv.addObject("livro", livro);
         return mv;
@@ -75,7 +89,7 @@ public class LivroController {
     //Mostrando detalhes do livro
     @RequestMapping("/livro/{id}")
     public ModelAndView detalhesLivro(@PathVariable("id") long id){
-        ModelAndView mv = new ModelAndView("vaga/detalhes-livro");
+        ModelAndView mv = new ModelAndView("livro/detalhes-livro");
         Livro livro = lr.findById(id);
         mv.addObject("livro", livro);
         return mv;
