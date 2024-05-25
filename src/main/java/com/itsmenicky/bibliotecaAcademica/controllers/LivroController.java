@@ -30,13 +30,12 @@ public class LivroController {
     public String form(@Valid Livro livro, BindingResult result, @RequestParam("imagem") MultipartFile imagem, RedirectAttributes attributes){
         if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Revise os campos!");
-            System.out.println("erro" + result.getAllErrors());
             return "redirect:/livros";
         }
 
         try {
             if(!imagem.isEmpty()){
-                livro.setFoto_livro(imagem.getBytes());
+                livro.setCapa_livro(imagem.getBytes());
             }
         }catch(IOException e){
             attributes.addFlashAttribute("mensagem", "Erro ao cadastrar imagem do livro");
@@ -92,7 +91,7 @@ public class LivroController {
 
         if(!imagem.isEmpty()){
             try {
-                currentLivro.setFoto_livro(imagem.getBytes());
+                currentLivro.setCapa_livro(imagem.getBytes());
             }catch (IOException e){
                 attributes.addFlashAttribute("mensagem", "Erro ao carregar imagem do livro");
                 return "redirect:/livros";
