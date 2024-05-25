@@ -75,15 +75,33 @@ public class LivroController {
     }
 
     //Método que realiza a atualização das informações do livro
-    @RequestMapping(value = "/editar-livro", method = RequestMethod.POST)
-    public String editarLivro(@Valid Livro livro, BindingResult result, RedirectAttributes attributes){
+    @RequestMapping(value = "/editar-livro/{id}", method = RequestMethod.POST)
+    public String editarLivro(@PathVariable("id") long id, @RequestParam("imagem") MultipartFile imagem, @Valid Livro livro, BindingResult result, RedirectAttributes attributes){
         if(result.hasErrors()){
             attributes.addFlashAttribute("mensagem", "Revise os campos!");
             return "redirect:/editar-livro";
         }
-        lr.save(livro);
-        long livroId = livro.getId();
-        return "redirect:/livro/" + livroId;
+
+        Livro currentLivro = lr.findById(id);
+
+        currentLivro.setTítulo(livro.getTítulo());
+        currentLivro.setEdicao(livro.getEdicao());
+        currentLivro.setAutor(livro.getAutor());
+        currentLivro.setSituacao(livro.getSituacao());
+        currentLivro.setISBN(livro.getISBN());
+
+        if(!imagem.isEmpty()){
+            try {
+                currentLivro.setFoto_livro(imagem.getBytes());
+            }catch (IOException e){
+                attributes.addFlashAttribute("mensagem", "Erro ao carregar imagem do livro");
+                return "redirect:/livros";
+            }
+        }
+
+        lr.save(currentLivro);
+        attributes.addFlashAttribute("mensagem", "Livro atualizado com sucesso!");
+        return "redirect:/livro/" + id;
     }
 
     //Mostrando detalhes do livro
