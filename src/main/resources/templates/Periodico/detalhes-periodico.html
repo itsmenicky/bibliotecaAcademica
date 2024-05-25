@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/src/main/resources/static/img/book-svgrepo-com.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Biblioteca Acadêmica | Livros e periódicos</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Biblioteca Acadêmica</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/livros">Livros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/periodicos">Periódicos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="p-5" th:each="periodico : ${periodico}">
+        <div class="text-center">
+            <img width="200" alt="Imagem de capa do periódico" th:src="'data:image/png;base64,' + ${periodico.getImagemBase64()}">
+        </div>
+        <h1 class="text-center p-5" th:text="${periodico.titulo}"></h1>
+        <p class="pt-3"><strong>Título:</strong> <span th:text="${periodico.titulo}"></span></p>
+        <p class="pt-3"><strong>Data de publicação:</strong> <span th:text="${periodico.data_publicacao}"></span></p>
+
+        <a th:href="@{'/editar-periodico/' + ${periodico.id}}" type="button" class="btn btn-warning mt-5">Editar periódico</a>
+        <a th:href="@{'/deletar-periodico/' + ${periodico.id}}" type="button" class="btn btn-danger mt-5">Apagar periódico</a>
+    </div>
+</main>
+</body>
+</html>
