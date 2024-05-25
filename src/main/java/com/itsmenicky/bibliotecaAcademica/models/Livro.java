@@ -30,9 +30,9 @@ public class Livro implements Serializable{
     private String autor;
 
     @Lob
-    private byte[] foto_livro;
+    private byte[] capa_livro;
 
     public String getImagemBase64(){
-        return Base64.getEncoder().encodeToString(this.foto_livro);
+        return Base64.getEncoder().encodeToString(this.capa_livro);
     }
 }
