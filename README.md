@@ -2,7 +2,7 @@
 <p align=center>📘 Sistema para biblioteca acadêmica hospedado na AWS ☁️</p>
 <div align=center><img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white"> <img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white">
 <img src="https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white"></div>
-<img style="border-radius: 10px" src="https://github.com/itsmenicky/bibliotecaAcademica/blob/main/Image/tela-principal.png">
+<img style="border-radius: 10px" src="https://github.com/itsmenicky/bibliotecaAcademica/blob/main/README-assets/tela-principal.png">
 
 
 <p align=justify>Pensando em uma instituição acadêmica que precisa cadastrar livros e periódicos para o controle dos mesmos, foi desenvolvido um sistema CRUD para controle de livros e periódicos. O sistema foi desenvolvido em Java utilizando Spring Framework. 
