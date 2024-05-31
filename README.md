@@ -16,5 +16,5 @@ para permitir o acesso da subrede privada a internet</p>
 
 ![image](https://github.com/itsmenicky/bibliotecaAcademica/assets/116317424/f9febeea-c727-4928-b70a-a8882b82a1ee)
 
-<p align=justify>Também foi emitida uma <a href="...">estimativa</a> de custos para 1 ano da aplicação em operação.</p>
+<p align=justify>Também foi emitida uma <a href="https://github.com/itsmenicky/bibliotecaAcademica/blob/main/README-assets/Estimativa AWS.pdf" download="Estimativa AWS.pdf">estimativa</a> de custos para 1 ano da aplicação em operação.</p>
 
